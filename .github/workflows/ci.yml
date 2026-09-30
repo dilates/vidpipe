@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-firasans fonts-jetbrains-mono
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install numpy
       - run: ./run.sh selftest
 
@@ -19,7 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-firasans fonts-jetbrains-mono
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: fonts (Fira Sans, JetBrains Mono — both OFL)
+        run: |
+          mkdir -p ~/.local/share/fonts
+          base=https://github.com/google/fonts/raw/main/ofl
+          for f in firasans/FiraSans-Regular.ttf firasans/FiraSans-Bold.ttf \
+                   jetbrainsmono/JetBrainsMono-Regular.ttf jetbrainsmono/JetBrainsMono-Bold.ttf; do
+            curl -sfL --retry 3 -o ~/.local/share/fonts/$(basename $f) "$base/$f"
+          done
+          fc-cache -f ~/.local/share/fonts
       - run: pip install numpy
       - name: generate fixture (piper TTS + moving subject)
         run: python3 tests/make_fixture.py
