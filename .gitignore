@@ -4,4 +4,4 @@ test/
 *.vidpipe/
 work/
 .DS_Store
-tests/fixture/fixture/
+tests/fixture/
