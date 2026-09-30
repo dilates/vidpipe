@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
-      - run: uv tool install whisper-ctranslate2 --with "av<15"
+      - run: uv tool install whisper-ctranslate2 --with "av<19"
       - name: fonts (Fira Sans, JetBrains Mono — both OFL)
         run: |
           mkdir -p ~/.local/share/fonts
