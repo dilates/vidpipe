@@ -1,0 +1,44 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  selftests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-firasans fonts-jetbrains-mono
+      - run: pip install numpy
+      - run: ./run.sh selftest
+
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-firasans fonts-jetbrains-mono
+      - run: pip install numpy
+      - name: generate fixture (piper TTS + moving subject)
+        run: python3 tests/make_fixture.py
+      - name: run.sh auto, end to end, CPU only
+        env:
+          VIDPIPE_ENCODER: libx264        # runners have no GPU; exercise the fallback
+        run: ./run.sh auto tests/fixture/fixture.mp4 talking tiny
+      - name: outputs exist and are valid
+        run: |
+          set -e
+          R=tests/fixture/fixture.vidpipe/result
+          test -s "$R/final.mp4"
+          test -s "$R/thumbnail.png"
+          test -s "$R/captions.srt"
+          test -s "$R/description.txt"
+          test -s "$R/titles.txt"
+          test -s "$R/chapters.txt"
+          ls "$R"/shorts/*.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 "$R/final.mp4"
+          # loudness lands near YouTube's -14 LUFS
+          I=$(ffmpeg -i "$R/final.mp4" -af ebur128 -f null - 2>&1 | grep -A1 "Integrated loudness" | grep "I:" | awk '{print $2}')
+          echo "integrated loudness: $I LUFS"
