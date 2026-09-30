@@ -1,0 +1,19 @@
+<style>/*CSS*/
+.wrap{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,11,.55),rgba(6,8,11,.9))}
+.es{position:absolute;left:110px;top:50%;transform:translateY(-50%);max-width:760px}
+.es .t{font-size:74px;font-weight:800;letter-spacing:-.035em;line-height:1.03}
+.es .s{font-size:31px;color:var(--dim);margin-top:20px;line-height:1.4}
+.row{display:flex;gap:16px;margin-top:40px}
+.pill{display:flex;align-items:center;gap:13px;padding:17px 28px;border-radius:100px;
+  background:var(--panel2);border:1px solid var(--line);font-size:26px;font-weight:600}
+.pill svg{width:25px;height:25px;fill:var(--accent)}
+.pill.hi{background:linear-gradient(140deg,var(--accent),var(--accent2));color:#080c10;border:0}
+.pill.hi svg{fill:#080c10}
+</style>
+<div class="stage"><div class="wrap"></div><div class="es">
+  <div class="t">{{title}}</div><div class="s">{{sub}}</div>
+  <div class="row">
+    <div class="pill hi"><svg viewBox="0 0 24 24"><path d="M12 3a5.5 5.5 0 0 0-5.5 5.5v3.2L4.8 15.2A1 1 0 0 0 5.7 16.7h12.6a1 1 0 0 0 .9-1.5l-1.7-3.5V8.5A5.5 5.5 0 0 0 12 3z"/><path d="M10 19a2 2 0 0 0 4 0z"/></svg>{{cta}}</div>
+    <div class="pill"><svg viewBox="0 0 24 24"><path d="M20 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3v4l5-4h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>{{cta2}}</div>
+  </div>
+</div></div>

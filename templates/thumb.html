@@ -1,0 +1,18 @@
+<style>/*CSS*/
+html,body{width:1280px;height:720px}
+.scrim{position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(5,7,10,.96) 0%,rgba(5,7,10,.88) 38%,rgba(5,7,10,.25) 62%,rgba(5,7,10,0) 78%)}
+.tb{position:absolute;left:64px;top:50%;transform:translateY(-50%);width:660px}
+.tb .top{font-size:31px;font-weight:800;letter-spacing:.22em;color:var(--accent);margin-bottom:16px}
+.tb .big{font-size:112px;font-weight:800;line-height:.92;letter-spacing:-.045em;
+  text-shadow:0 10px 44px rgba(0,0,0,.9)}
+.tb .big em{font-style:normal;color:var(--accent)}
+.tb .sub{font-size:33px;font-weight:600;color:#c9d3de;margin-top:22px;line-height:1.24}
+.tb .rule{width:132px;height:8px;border-radius:5px;margin-top:26px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2))}
+</style>
+<div class="stage"><div class="scrim"></div><div class="tb">
+  <div class="top">{{top}}</div>
+  <div class="big">{{big}}</div>
+  <div class="sub">{{sub}}</div><div class="rule"></div>
+</div></div>

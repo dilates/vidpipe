@@ -1,0 +1,14 @@
+<style>/*CSS*/
+.co{position:absolute;right:88px;top:150px;width:600px;padding:32px 36px 34px 44px}
+.co .t{font-size:34px;font-weight:700;line-height:1.15;margin-bottom:14px;letter-spacing:-.01em}
+.co ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.co li{font-size:25px;line-height:1.35;padding-left:34px;position:relative;color:#dfe6ee}
+.co li:before{content:'';position:absolute;left:6px;top:.55em;width:11px;height:11px;border-radius:3px;
+  background:var(--accent);box-shadow:0 0 14px color-mix(in srgb,var(--accent) 60%,transparent)}
+</style>
+<div class="stage"><div class="co card">
+  <div class="accentbar"></div>
+  <div class="kicker" style="margin-bottom:10px">{{kicker}}</div>
+  <div class="t">{{title}}</div>
+  <ul>{{items}}</ul>
+</div></div>

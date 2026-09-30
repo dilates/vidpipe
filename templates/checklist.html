@@ -1,0 +1,15 @@
+<style>/*CSS*/
+.ck{position:absolute;right:92px;top:50%;transform:translateY(-50%);width:660px;padding:34px 38px 36px 46px}
+.ck .t{font-size:36px;font-weight:700;margin-bottom:22px;letter-spacing:-.015em}
+.ck li{list-style:none;font-size:26px;line-height:1.35;padding:13px 0 13px 48px;position:relative;
+  border-top:1px solid var(--line);color:#dfe6ee}
+.ck li:first-of-type{border-top:0}
+.ck li:before{content:'';position:absolute;left:8px;top:1.15em;width:19px;height:11px;
+  border-left:4px solid var(--accent);border-bottom:4px solid var(--accent);
+  transform:translateY(-70%) rotate(-45deg);border-radius:2px}
+</style>
+<div class="stage"><div class="ck card">
+  <div class="accentbar"></div>
+  <div class="kicker" style="margin-bottom:10px">{{kicker}}</div>
+  <div class="t">{{title}}</div><ul>{{items}}</ul>
+</div></div>
