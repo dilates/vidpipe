@@ -24,10 +24,9 @@ jobs:
         run: |
           mkdir -p ~/.local/share/fonts
           base=https://github.com/google/fonts/raw/main/ofl
-          for f in firasans/FiraSans-Regular.ttf firasans/FiraSans-Bold.ttf \
-                   jetbrainsmono/JetBrainsMono-Regular.ttf jetbrainsmono/JetBrainsMono-Bold.ttf; do
-            curl -sfL --retry 3 -o ~/.local/share/fonts/$(basename $f) "$base/$f"
-          done
+          curl -sfL --retry 3 -o ~/.local/share/fonts/FiraSans-Regular.ttf "$base/firasans/FiraSans-Regular.ttf"
+          curl -sfL --retry 3 -o ~/.local/share/fonts/FiraSans-Bold.ttf    "$base/firasans/FiraSans-Bold.ttf"
+          curl -sfL --retry 3 -o ~/.local/share/fonts/JetBrainsMono.ttf    "$base/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
           fc-cache -f ~/.local/share/fonts
       - run: pip install numpy
       - name: generate fixture (piper TTS + moving subject)
