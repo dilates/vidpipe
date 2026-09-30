@@ -1,5 +1,7 @@
 # vidpipe
 
+[![ci](https://github.com/dilates/vidpipe/actions/workflows/ci.yml/badge.svg)](https://github.com/dilates/vidpipe/actions/workflows/ci.yml)
+
 **Raw footage → finished, ready-to-post video. 100% local.**
 
 One recording in; out comes the edited video, the shorts, the thumbnail, the
@@ -71,8 +73,9 @@ crops around the detected subject, not the frame centre:
 ## Quickstart
 
 ```bash
-# system deps: ffmpeg, chromium/chrome, Fira Sans + JetBrains Mono fonts
-sudo apt install ffmpeg chromium fonts-firasans fonts-jetbrains-mono
+# system deps: ffmpeg, chromium/chrome, and two OFL fonts
+sudo apt install ffmpeg chromium          # brew install ffmpeg chromium (macOS)
+tools/install-fonts.sh                    # Fira Sans + JetBrains Mono, user-level
 pip install numpy
 ./run.sh auto ~/footage/talk.mp4 talking          # full auto: cut + dress + shorts + package
 ./run.sh auto ~/footage/episode.mkv gameplay      # gameplay mode keeps loud action
@@ -173,7 +176,7 @@ colouring.
 | chromium/chrome | renders the HTML graphics (`VIDPIPE_CHROME` to point elsewhere) |
 | python 3.10+ with numpy | the pipeline itself |
 | whisper-ctranslate2 | transcription (optional: you can hand-write `words_raw`) |
-| Fira Sans, JetBrains Mono | graphics + captions |
+| Fira Sans, JetBrains Mono | graphics + captions (`tools/install-fonts.sh`) |
 
 ## Tests
 
