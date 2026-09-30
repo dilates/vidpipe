@@ -161,7 +161,7 @@ def build(src, start, end, out, words, work, title=None, card=None,
     script.write_text(";\n".join(fc))
     cmd = (["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
             "-ss", f"{start:.3f}", "-t", f"{dur:.3f}", "-i", str(src)] + inputs +
-           *render.fc_arg(script), "-map", "[vout]", "-map", "[aout]",
+           render.fc_arg(script) + ["-map", "[vout]", "-map", "[aout]",
             *enc.video_args(quality=19, maxrate="20M", bufsize="40M"),
             "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-movflags", "+faststart", str(out)])
     subprocess.run(cmd, check=True)
