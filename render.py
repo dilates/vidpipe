@@ -9,7 +9,7 @@ Independent output muxers all drain in parallel, so this is the safe shape.
 Pass 2: concat demuxer -> zooms, graphics, captions, audio, SFX, music -> NVENC.
 """
 import math
-import json, subprocess, sys
+import json, re, subprocess, sys
 from pathlib import Path
 
 import gfx, sfx, enc
@@ -213,8 +213,25 @@ def _atempo(sp):
     return out
 
 
-# ffmpeg 9 removed -filter_complex_script; "-/filter_complex <file>" is the generic
-# "read this option's value from a file" form that replaced it.
+# ffmpeg 9 removed -filter_complex_script; ffmpeg 7 added the generic
+# "-/opt file" read-value-from-file form. Ubuntu noble ships 6.1, which only
+# knows the old flag — pick per version (found by CI).
+_fc_major = None
+
+
+def ffmpeg_major():
+    global _fc_major
+    if _fc_major is None:
+        r = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
+        _fc_major = int(re.search(r"ffmpeg version n?(\d+)", r.stdout).group(1))
+    return _fc_major
+
+
+def fc_arg(script):
+    return (["-/filter_complex", str(script)] if ffmpeg_major() >= 7
+            else ["-filter_complex_script", str(script)])
+
+
 def cut_pass(plan, work, fps, declick=0.025):
     """One decode -> one near-lossless file per CLIP.
 
@@ -245,7 +262,7 @@ def cut_pass(plan, work, fps, declick=0.025):
     script = work / "cut.txt"
     script.write_text(";\n".join(fc))
     return (["ffmpeg", "-y", "-hide_banner", "-i", plan["source"],
-             "-/filter_complex", str(script)] + cmd_out), files
+             *fc_arg(script)] + cmd_out), files
 
 
 def dress_pass(plan, work, vin, W, H, fps, total, single=None):
@@ -329,7 +346,7 @@ def dress_pass(plan, work, vin, W, H, fps, total, single=None):
     script = work / "dress.txt"
     script.write_text(";\n".join(fc))
     return (["ffmpeg", "-y", "-hide_banner"] + vin + inputs +
-            ["-/filter_complex", str(script), "-map", "[vout]", "-map", "[aout]",
+            fc_arg(script) + ["-map", "[vout]", "-map", "[aout]",
              # spatial+temporal AQ matter most on a locked-off shot: without them NVENC
              # spends its bits on the static background and softens the moving speaker.
              # Measured vs the near-lossless intermediate: +3.2 dB PSNR over p6/cq21.
@@ -377,6 +394,8 @@ def main():
 
 def _selftest():
     import tempfile
+    assert ffmpeg_major() >= 4
+    assert fc_arg("x")[0] in ("-/filter_complex", "-filter_complex_script")
     assert _ts(3661.5) == "1:01:01.50"
     prod = lambda sp: __import__("math").prod(float(x.split("=")[1]) for x in _atempo(sp))
     assert _atempo(1.0) == []
