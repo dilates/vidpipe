@@ -1,0 +1,13 @@
+<style>/*CSS*/
+.ch{position:absolute;left:140px;top:50%;transform:translateY(-50%)}
+.ch .num{font-size:22px;font-weight:700;letter-spacing:.26em;color:var(--accent);margin-bottom:20px}
+.ch .t{font-size:104px;font-weight:800;letter-spacing:-.035em;line-height:1;text-shadow:0 10px 40px rgba(0,0,0,.7)}
+.ch .s{font-size:32px;margin-top:20px;color:var(--dim)}
+.ch .rule{width:120px;height:5px;margin-top:30px;border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,11,.93) 0%,rgba(6,8,11,.75) 48%,rgba(6,8,11,0) 82%)}
+</style>
+<div class="stage"><div class="scrim"></div><div class="ch">
+  <div class="num">{{num}}</div><div class="t">{{title}}</div>
+  <div class="s">{{sub}}</div><div class="rule"></div>
+</div></div>

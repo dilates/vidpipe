@@ -1,0 +1,11 @@
+<style>/*CSS*/
+.wrap{position:absolute;inset:0;background:linear-gradient(105deg,rgba(6,8,11,.97) 0%,rgba(6,8,11,.93) 55%,rgba(6,8,11,.82) 100%)}
+.tr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:30px}
+.tr .bar{width:9px;height:96px;border-radius:6px;background:linear-gradient(180deg,var(--accent),var(--accent2));
+  box-shadow:0 0 34px color-mix(in srgb,var(--accent) 55%,transparent)}
+.tr .k{font-size:21px;font-weight:700;letter-spacing:.3em;color:var(--accent);margin-bottom:12px}
+.tr .t{font-size:74px;font-weight:800;letter-spacing:-.035em;line-height:1}
+</style>
+<div class="stage"><div class="wrap"></div><div class="tr">
+  <div class="bar"></div><div><div class="k">{{kicker}}</div><div class="t">{{title}}</div></div>
+</div></div>

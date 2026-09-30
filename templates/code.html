@@ -1,0 +1,13 @@
+<style>/*CSS*/
+.cd{position:absolute;left:50%;bottom:120px;transform:translateX(-50%);max-width:1360px;padding:0;overflow:hidden}
+.cd .bar{display:flex;align-items:center;gap:10px;padding:16px 22px;background:rgba(255,255,255,.045);
+  border-bottom:1px solid var(--line)}
+.cd .dot{width:12px;height:12px;border-radius:50%;background:#3a4250}
+.cd .fn{margin-left:12px;font-size:19px;color:var(--dim)}
+.cd pre{padding:30px 38px;font-size:27px;line-height:1.5;white-space:pre;color:#e8eef5}
+.cd .cm{color:#7f8b99}.cd .kw{color:var(--accent2)}.cd .st{color:var(--accent)}
+</style>
+<div class="stage"><div class="cd card mono">
+  <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="fn">{{file}}</span></div>
+  <pre>{{code}}</pre>
+</div></div>
