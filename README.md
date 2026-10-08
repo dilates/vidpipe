@@ -192,4 +192,4 @@ without a GPU" is a checked claim, not a promise.
 ## License
 
 MIT. SFX and graphics are generated at runtime from code and templates — no
-licensed assets in the repo or the output.
+licensed assets in the repo or the output. 
